@@ -54,10 +54,11 @@ class _MyAppState extends State<MyApp> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               QuestionText(
-                  questionText: questionsList[_questionIndex]['question']
-              ),
-              ...(questionsList[_questionIndex]['answers'] as List<String>).map((myAnswer) {
-                return AnswerText(answerText: myAnswer, onPressedCall: _answerQuestion);
+                  questionText: questionsList[_questionIndex]['question']),
+              ...(questionsList[_questionIndex]['answers'] as List<String>)
+                  .map((myAnswer) {
+                return AnswerText(
+                    answerText: myAnswer, onPressedCall: _answerQuestion);
               }).toList(),
             ],
           ),
