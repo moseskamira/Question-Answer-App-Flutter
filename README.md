@@ -1,4 +1,4 @@
-# flutter_project_two
+# QuestionAnswerApp
 
 This project is intended for Levelling-up on Flutter as a Framework and Dart as a language
 
