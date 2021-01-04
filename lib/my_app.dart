@@ -13,8 +13,20 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
+  final questionsList = [
+    {
+      'question': 'What is your favorite color ?',
+      'answers': ['Blue', 'Green', 'Yellow'],
+    },
+    {
+      'question': 'What\'s your favorite animal ?',
+      'answers': ['Cat', 'Rabbit', 'Donkey'],
+    },
+  ];
 
   void _answerQuestion() {
+    // _questionIndex > questionsList.length?
+
     setState(() {
       _questionIndex++;
     });
@@ -22,16 +34,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext ctx) {
-    final questionsList = [
-      {
-        'question': 'What is your favorite color ?',
-        'answers': ['Blue', 'Green', 'Yellow'],
-      },
-      {
-        'question': 'What\'s your favorite animal ?',
-        'answers': ['Cat', 'Rabbit', 'Donkey'],
-      },
-    ];
     return MaterialApp(
       title: 'QuestAnsApp',
       theme: ThemeData(
@@ -50,18 +52,25 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              QuestionText(
-                  questionText: questionsList[_questionIndex]['question']),
-              ...(questionsList[_questionIndex]['answers'] as List<String>)
-                  .map((myAnswer) {
-                return AnswerText(
-                    answerText: myAnswer, onPressedCall: _answerQuestion);
-              }).toList(),
-            ],
-          ),
+          child: _questionIndex >= questionsList.length
+              ? Text(
+                  "You Are Done, Thank You!",
+                  textAlign: TextAlign.center,
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    QuestionText(
+                        questionText: questionsList[_questionIndex]
+                            ['question']),
+                    ...(questionsList[_questionIndex]['answers']
+                            as List<String>)
+                        .map((myAnswer) {
+                      return AnswerText(
+                          answerText: myAnswer, onPressedCall: _answerQuestion);
+                    }).toList(),
+                  ],
+                ),
         ),
       ),
     );
